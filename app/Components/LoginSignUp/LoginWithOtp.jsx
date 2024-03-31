@@ -147,10 +147,12 @@ export default function LoginWithOtp(props) {
             mobile: data?.phone,
             otp_type: "login"
         }, { headers })
-        .then((res) => {
-            setGetMobile(data?.phone);
-            res?.statusText === "OK" ? setShowForm("verifyotp") : '';
-        });
+            .then((res) => {
+                setGetMobile(data?.phone);
+                console.log("??????????????????????.................", res);
+                res?.statusText === "OK" ? setShowForm("verifyotp") : '';
+
+            });
     };
 
     return (
