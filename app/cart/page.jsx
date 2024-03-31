@@ -26,6 +26,9 @@ export default function Home() {
 
     // console.log("fetchedData", fetchedData);
 
+    // newwwwwwwwwwwwwwwwwwww 
+    let a = ""
+
 
     useEffect(() => {
         const fetchData = async () => {
