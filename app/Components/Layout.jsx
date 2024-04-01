@@ -14,11 +14,15 @@ export default function Layout({ children }) {
     const [showLogin, setShowLogin] = useState(true);
     const [Location, setLocation] = useState()
 
-    const [showLocationPopUp, setShowLocationPopUp] = useState(true) // for showing google map
     const locationFromCookies = Cookies.get("locations")
 
+    // const [loc,setLoc] = useState(Cookies.get("locations"))
+    const [showLocationPopUp, setShowLocationPopUp] = useState(true) // for showing google map
 
-    locationFromCookies == "undefined" ? showLocationPopUp(true) : ''
+
+    locationFromCookies == "undefined" ? setShowLocationPopUp(true) : showLocationPopUp;
+
+    console.log("showLocationPopUp>>>>>><<<<<<",showLocationPopUp);
 
 
     return (
@@ -33,16 +37,15 @@ export default function Layout({ children }) {
 
             <LoginSignUp showLogin={showLogin} setShowLogin={setShowLogin} />
 
-            {showLocationPopUp && <GetLocation
-                showLocationPopUp={showLocationPopUp}
-                setShowLocationPopUp={setShowLocationPopUp}
-                Location={Location}
-                setLocation={setLocation}
-                locationFromCookies={locationFromCookies}
-            />
-            }
-
-
+        
+            <GetLocation
+            showLocationPopUp={showLocationPopUp}
+            setShowLocationPopUp={setShowLocationPopUp}
+            
+            Location={Location}
+            setLocation={setLocation}
+            locationFromCookies={locationFromCookies}
+        />
 
 
 
@@ -60,3 +63,16 @@ export default function Layout({ children }) {
 
     )
 }
+
+
+// {showLocationPopUp &&
+
+    // <GetLocation
+    //     showLocationPopUp={showLocationPopUp}
+    //     setShowLocationPopUp={setShowLocationPopUp}
+    //     Location={Location}
+    //     setLocation={setLocation}
+    //     locationFromCookies={locationFromCookies}
+    // />
+    
+// }

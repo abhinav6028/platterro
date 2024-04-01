@@ -227,7 +227,11 @@ export default function Header(props) {
                         <Grid container xs={10} sm={10} md={6} lg={6} sx={{ bgcolor: '', justifyContent: 'space-between' }} >
                             <Typography
 
-                                onClick={() => Cookies.remove('locations')}
+                                onClick={() => {
+                                    Cookies.remove('locations')
+                                    setShowLocationPopUp(!showLocationPopUp)
+                                }}
+                                // onClick={() => {setShowLocationPopUp()}}
                                 sx={{
                                     fontSize: { md: 11, lg: 14 },
                                     fontWeight: 700, mt: .2,
