@@ -1,7 +1,10 @@
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Layout from "./Components/Layout";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,15 +33,12 @@ export default function RootLayout({
 
       <body className={inter.className}>
 
-        <Layout>
-          {/* <StartLocationPopUp /> */}
+        {/* <Provider store={store}> */}
+          <Layout>
+            {children}
+          </Layout>
+        {/* </Provider> */}
 
-          {children}
-        </Layout>
-
-        {/* <Header />
-       
-        <Footer /> */}
 
 
       </body>

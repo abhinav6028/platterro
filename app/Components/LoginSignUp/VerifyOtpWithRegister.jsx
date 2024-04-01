@@ -25,15 +25,13 @@ export default function VerifyOtpWithRegister(props) {
 
     const headers = {
         'Authorization': 'Bearer akhil@intertoons.com', // Bearer token
-        'Content-Type': 'application/json' // Assuming the content type is JSON
+        'Content-Type': 'application/json', // Assuming the content type is JSON
+        country: "IN"
     };
 
-    // console.log("errors", errors);
-
+    // console.log("???????????????/////", getMobile);
 
     const onSubmit = (data) => {
-
-        // console.log("data>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", getMobile);
 
 
         axios.post(`${BASE_URL}verify-otp`, {
@@ -42,11 +40,10 @@ export default function VerifyOtpWithRegister(props) {
             otp: data?.otp
         }, { headers }
         ).then((res) => {
-            // console.log("res", res)
+            console.log("res", res)
             res?.statusText == "OK" ? setShowLogin(!showLogin) : ''
-            // setGetMobile()
             Cookies.set('auth_token', res?.data?.data?.api_token);
-
+            res?.statusText == "OK"
         }
         )
     }

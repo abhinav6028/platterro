@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import GetLocation from "./GetLocation";
 
 import Cookies from 'js-cookie'
+import { Provider } from "react-redux";
+import store from "../redux/store";
 
 // Layout
 export default function Layout({ children }) {
@@ -16,16 +18,18 @@ export default function Layout({ children }) {
 
     const locationFromCookies = Cookies.get("locations")
 
-    // const [loc,setLoc] = useState(Cookies.get("locations"))
     const [showLocationPopUp, setShowLocationPopUp] = useState(true) // for showing google map
 
 
     locationFromCookies == "undefined" ? setShowLocationPopUp(true) : showLocationPopUp;
 
-    console.log("showLocationPopUp>>>>>><<<<<<",showLocationPopUp);
+    // console.log("showLocationPopUp>>>>>><<<<<<",showLocationPopUp);
 
 
     return (
+
+        <Provider store={store}>
+       
         <Grid container>
 
             <Header
@@ -59,20 +63,9 @@ export default function Layout({ children }) {
             <Footer />
 
         </Grid>
-
+        </Provider>
 
     )
 }
 
 
-// {showLocationPopUp &&
-
-    // <GetLocation
-    //     showLocationPopUp={showLocationPopUp}
-    //     setShowLocationPopUp={setShowLocationPopUp}
-    //     Location={Location}
-    //     setLocation={setLocation}
-    //     locationFromCookies={locationFromCookies}
-    // />
-    
-// }

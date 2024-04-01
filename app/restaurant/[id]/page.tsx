@@ -4,7 +4,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 import 'animate.css';
-import getData from "../hooks/useFetchData";
+import getData from "@/app/hooks/useFetchData";
 
 export default function Home() {
     const [itemCount, setItemCount] = useState(0);
@@ -21,7 +21,6 @@ export default function Home() {
         fetchData();
     }, []);
 
-    console.log("?????????????????", fetchedData);
 
     return (
         <Grid container sx={{
