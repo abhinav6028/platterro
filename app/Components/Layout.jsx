@@ -29,43 +29,41 @@ export default function Layout({ children }) {
     return (
 
         <Provider store={store}>
-       
-        <Grid container>
 
-            <Header
-                showLogin={showLogin}
-                setShowLogin={setShowLogin}
-                showLocationPopUp={showLocationPopUp}
-                setShowLocationPopUp={setShowLocationPopUp}
-            />
-
-            <LoginSignUp showLogin={showLogin} setShowLogin={setShowLogin} />
-
-        
-            <GetLocation
-            showLocationPopUp={showLocationPopUp}
-            setShowLocationPopUp={setShowLocationPopUp}
-            
-            Location={Location}
-            setLocation={setLocation}
-            locationFromCookies={locationFromCookies}
-        />
+            <Grid container>
 
 
+                <Header
+                    showLogin={showLogin}
+                    setShowLogin={setShowLogin}
+                    showLocationPopUp={showLocationPopUp}
+                    setShowLocationPopUp={setShowLocationPopUp}
+                />
 
-            <Grid container sx={{
-                // mt: 30
-            }}>
+                <LoginSignUp showLogin={showLogin} setShowLogin={setShowLogin} />
 
-                {children}
+
+                <GetLocation
+                    showLocationPopUp={showLocationPopUp}
+                    setShowLocationPopUp={setShowLocationPopUp}
+
+                    Location={Location}
+                    setLocation={setLocation}
+                    locationFromCookies={locationFromCookies}
+                />
+
+                <Grid container sx={{
+                    // mt: 30
+                }}>
+
+                    {children}
+                </Grid>
+
+                <Footer />
+
             </Grid>
-
-            <Footer />
-
-        </Grid>
         </Provider>
 
     )
 }
-
 
