@@ -24,6 +24,7 @@ export default function EnterOtp(props) {
     const headers = {
         Authorization: 'Bearer akhil@intertoons.com', // Bearer token
         'Content-Type': 'application/json', // Assuming the content type is JSON
+        country:"IN"
     };
 
     const onSubmit = (data) => {
@@ -38,7 +39,7 @@ export default function EnterOtp(props) {
             .then((res) => {
                 console.log('res', res);
                 res?.statusText === 'OK' ? setShowLogin(!showLogin) : '';
-                Cookies.set('user_auth_token', res?.data?.data?.api_token);
+                Cookies.set('auth_token', res?.data?.data?.api_token);
             });
     };
 

@@ -28,47 +28,81 @@ export default function SignUpForm(props) {
 
     const headers = {
         'Authorization': 'Bearer akhil@intertoons.com', // Bearer token
-        'Content-Type': 'application/json' // Assuming the content type is JSON
+        'Content-Type': 'application/json', // Assuming the content type is JSON
+        country: "IN"
     };
 
     const onSubmit = (data) => {
 
+        axios.post(`${BASE_URL}send-otp`, {
+            mobile: data?.phone,
+            otp_type: "register"
+        }, { headers })
+            .then((res) => {
+                console.log("??????????????????????.................send:", res?.statusText);
+                // alert("??????????")
+                axios.post(`${BASE_URL}customers`, {
+                    email: data.email,
+                    password: data.Password,
+                    first_name: data.fullname,
+                    last_name: 'Intertoons', // Assuming last_name is always 'Intertoons'
+                    phone: data?.phone,
+                    ref_code: ''
+                }, { headers }
+                ).then((res) => {
+                    console.log("??????????????????????.................register:", res?.statusText);
+                    setGetMobile(data.phone)
+                    setShowForm("verifyotpWithRegister")
+                })
+
+                // if (res?.statusText == "ok") {
+                //     alert("??????????")
+                //     // axios.post(`${BASE_URL}customers`, {
+                //     //     email: data.email,
+                //     //     password: data.Password,
+                //     //     first_name: data.fullname,
+                //     //     last_name: 'Intertoons', // Assuming last_name is always 'Intertoons'
+                //     //     phone: data?.ph,
+                //     //     ref_code: ''
+                //     // }, { headers }
+                //     // ).then((res) => {
+                //     //     console.log("??????????????????????.................register:", res?.statusText);
+                //     //     setGetMobile(data.phone)
+                //     // })
+                // }
+            });
+
         // console.log(":::::::::::::::::::");
 
-        setShowForm("verifyotpWithRegister")
+        // setShowForm("verifyotpWithRegister")
 
 
-        axios.post(`${BASE_URL}customers`, {
-            email: data.email,
-            password: data.Password,
-            first_name: data.fullname,
-            last_name: 'Intertoons', // Assuming last_name is always 'Intertoons'
-            phone: data.phone,
-            ref_code: ''
-        }, { headers }
-        ).then((res) => {
-            // console.log("res", res);
-
-            // res?.statusText == "OK" ? setShowForm("verifyotpWithRegister") : ''
-            // setShowForm("verifyotpWithRegister")
-            setGetMobile(data.phone)
-            res?.statusText == "OK" ? setShowForm("verifyotpWithRegister") : ''
-
-            // if (res?.statusText == "OK") {
-            //     axios.post(`${BASE_URL}send-otp`, {
-            //         mobile: data?.phone,
-            //         otp_type: "register"
-            //     }, { headers })
-            //         .then((res) => {
-            //             setGetMobile(data?.phone);
-
-            //             // console.log("??????????????????????.................", res);
-            //             res?.statusText == "OK" ? setShowForm("verifyotpWithRegister") : ''
-
-            //         });
-            // }
-        })
+        // axios.post(`${BASE_URL}customers`, {
+        //     email: data.email,
+        //     password: data.Password,
+        //     first_name: data.fullname,
+        //     last_name: 'Intertoons', // Assuming last_name is always 'Intertoons'
+        //     phone: data?.ph,
+        //     ref_code: ''
+        // }, { headers }
+        // ).then((res) => {
+        //     console.log("??????????????????????.................register", res?.statusText);
+        //     setGetMobile(data.phone)
+        // })
     }
+
+    // if (res?.statusText == "OK") {
+    //     axios.post(`https://pappad.intertoons.com/api/03879045/V1/send-otp`, {
+    //         mobile: 7645342343,
+    //         otp_type: "register"
+    //     }, { headers })
+    //         .then((res) => {
+    //             setGetMobile(getMobile);
+    //             console.log("??????????????????????.................send", res?.statusText);
+    //             // res?.statusText == "OK" ? setShowForm("verifyotpWithRegister") : ''
+
+    //         });
+    // }
 
     return (
         <Grid container md={12} lg={12}>

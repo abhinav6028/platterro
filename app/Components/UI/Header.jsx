@@ -1,4 +1,5 @@
-import { Box, Grid, Typography } from "@mui/material";
+"use client"
+import { Badge, Box, Grid, Typography } from "@mui/material";
 import HeaderDropDown from "../HeaderDropDown";
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import Popup from "reactjs-popup";
@@ -10,7 +11,7 @@ import { PRIMARY_BGCOLOUR, SECONDARY_TEXTCOLOUR } from "@/utils";
 import Link from "next/link";
 import useFetchData from "@/app/hooks/useFetchData";
 import getData from "@/app/hooks/useFetchData";
-
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Cookies from 'js-cookie'
 // import { cookies } from "next/headers";
 // import { json } from "stream/consumers";
@@ -24,6 +25,19 @@ export default function Header(props) {
     const A = Cookies.get("locations")
 
     const loc = A ? JSON.parse(A).join(',') : ''
+
+    const [fetchedData, setFetchedData] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await getData('V1/restuarant/114');
+            setFetchedData(result?.data);
+        }
+
+        fetchData();
+    }, []);
+
+    console.log("fetchedData from header : ", fetchedData?.featured_items?.length);
 
 
     const dropItems = [
@@ -224,7 +238,7 @@ export default function Header(props) {
                             title="TAKE LOCATION"
                         /> */}
 
-                        <Grid container xs={10} sm={10} md={6} lg={6} sx={{ bgcolor: '', justifyContent: 'space-between' }} >
+                        <Grid container xs={12} sm={10} md={6} lg={6} sx={{ bgcolor: '', justifyContent: 'space-between' }} >
                             <Typography
 
                                 onClick={() => {
@@ -245,11 +259,9 @@ export default function Header(props) {
 
                             <Link href='/cart'>
 
-                                <Typography>
-
-                                    cart
-
-                                </Typography>
+                                <Badge badgeContent={fetchedData?.featured_items?.length    } color="primary">
+                                    <ShoppingCartIcon color="action" />
+                                </Badge>
                             </Link>
 
 
