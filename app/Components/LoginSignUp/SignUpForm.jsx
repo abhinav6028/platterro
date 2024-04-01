@@ -48,9 +48,25 @@ export default function SignUpForm(props) {
         }, { headers }
         ).then((res) => {
             // console.log("res", res);
-            res?.statusText == "OK" ? setShowForm("verifyotpWithRegister") : ''
+
+            // res?.statusText == "OK" ? setShowForm("verifyotpWithRegister") : ''
             // setShowForm("verifyotpWithRegister")
             setGetMobile(data.phone)
+            res?.statusText == "OK" ? setShowForm("verifyotpWithRegister") : ''
+
+            // if (res?.statusText == "OK") {
+            //     axios.post(`${BASE_URL}send-otp`, {
+            //         mobile: data?.phone,
+            //         otp_type: "register"
+            //     }, { headers })
+            //         .then((res) => {
+            //             setGetMobile(data?.phone);
+
+            //             // console.log("??????????????????????.................", res);
+            //             res?.statusText == "OK" ? setShowForm("verifyotpWithRegister") : ''
+
+            //         });
+            // }
         })
     }
 

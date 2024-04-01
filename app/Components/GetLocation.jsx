@@ -10,6 +10,10 @@ const GetLocation = ({ showLocationPopUp, setShowLocationPopUp, locationFromCook
 
     locationFromCookies ? setShowLocationPopUp(!showLocationPopUp) : ''
 
+    console.log(("showLocationPopUp from GetLocation???", showLocationPopUp))
+    
+
+
 
     useEffect(() => {
 
@@ -50,9 +54,10 @@ const GetLocation = ({ showLocationPopUp, setShowLocationPopUp, locationFromCook
 
                 const locations = places[0].address_components.map(data => data.long_name);
 
+                setShowLocationPopUp(!showLocationPopUp)
                 Cookies.set("locations", JSON.stringify(locations)).then(() => alert("?????????????"))
 
-                console.log("locations", locations);
+                // console.log("locations", locations);
 
                 const bounds = new window.google.maps.LatLngBounds();
 
