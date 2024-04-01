@@ -19,26 +19,26 @@ export default function Home() {
     const token = Cookies.get("user_auth_token")
 
 
-        useEffect(() => {
-            const fetchData = async () => {
-                try {
-                    const response = await axios.get('https://pappad.intertoons.com/api/V1/carts/mine?latitude=4.103389900&longitude=9.742897300', {
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Content-Type': 'application/json'
-                            // Add any other headers you need
-                        }
-                    });
-                    // console.log(">>>>>>>>>>>>>>>>>>>>>>>")
-                    setFetchedData(response?.data?.data)
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                    // Handle errors here
-                }
-            };
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('https://pappad.intertoons.com/api/V1/carts/mine?latitude=4.103389900&longitude=9.742897300', {
+                    headers: {
+                        'Authorization': `Bearer 0l8WFyfo3cjLqea7bYbiBSAKBKupRS26QXqi5wDn0JAov85wMK3HLHca567Umcwt6rW6s8GywUrOrID6`,
+                        'Content-Type': 'application/json'
+                        // Add any other headers you need
+                    }
+                });
+                // console.log(">>>>>>>>>>>>>>>>>>>>>>>")
+                setFetchedData(response?.data?.data)
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                // Handle errors here
+            }
+        };
 
-            fetchData();
-        }, []);
+        fetchData();
+    }, []);
 
     // console.log("fetchedData??????????", fetchedData?.cartitems)
 

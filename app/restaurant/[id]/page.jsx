@@ -5,22 +5,38 @@ import { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 import 'animate.css';
 import getData from "@/app/hooks/useFetchData";
+import { usePathname } from "next/navigation";
+import axios from "axios";
 
 export default function Home() {
+
+    const pathName = usePathname().split('/')[2]
+
+    console.log("pathName", pathName);
+
     const [itemCount, setItemCount] = useState(0);
     const [clickedItem, setClickedItem] = useState([]);
 
     const [fetchedData, setFetchedData] = useState(null);
 
+
+
     useEffect(() => {
         const fetchData = async () => {
-            const result = await getData('V1/restuarant/114');
+            const result = await getData(`V1/restuarant/${pathName}`);
             setFetchedData(result?.data);
         }
 
         fetchData();
     }, []);
 
+
+    const token = "Bearer 0l8WFyfo3cjLqea7bYbiBSAKBKupRS26QXqi5wDn0JAov85wMK3HLHca567Umcwt6rW6s8GywUrOrID6"
+
+    const headers = {
+        'Authorization': token, // Bearer token
+        'Content-Type': 'application/json' // Assuming the content type is JSON
+    };
 
     return (
         <Grid container sx={{
@@ -173,8 +189,18 @@ export default function Home() {
                                         borderTopLeftRadius: 12,
                                         borderTopRightRadius: 12
                                     }} />
-                                <Grid container>
-                                    <Grid container onClick={() => { setClickedItem([...clickedItem, index]) }}
+                                <Grid container sx={{ bgcolor: '' }}>
+                                    <Grid container onClick={() => {
+                                        axios.post('https://pappad.intertoons.com/api/V1/carts/mine/items',
+                                            {
+                                                menu_id: data?.id,
+                                                qty: 1
+                                            }, { headers }
+                                        ).then((res) => console.log("res", res))
+
+                                        console.log("???>>>", data?.id)
+
+                                    }}
                                         sx={{
                                             justifyContent: 'center', alignItems: 'center', cursor: 'pointer',
                                             display: clickedItem.includes(index) ? 'none' : "flex",
@@ -187,7 +213,7 @@ export default function Home() {
                                     <Grid container sx={{
                                         boxShadow: 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px', bgcolor: '',
                                         display: clickedItem.includes(index) ? 'flex' : "none",
-                                        justifyContent: 'space-around'
+                                        justifyContent: 'space-around', bgcolor: 'red'
                                     }}>
                                         <Grid container xs={4} sm={4} md={4} lg={4} onClick={() => setItemCount(itemCount - 1)} sx={{ justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}>
                                             <Box component="img" src="/Assets/icons/mainus.png" />

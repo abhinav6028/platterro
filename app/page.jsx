@@ -10,10 +10,10 @@ import { fetchData } from "./redux/store";
 
 export default function Home() {
 
-  const dispatch = useDispatch();
-  const { value, loading, error } = useSelector(state => state.data);
-  useEffect(() => { dispatch(fetchData()) }, [dispatch]);
-  console.log("????????????????????????????", value?.data);
+  // const dispatch = useDispatch();
+  // const { value, loading, error } = useSelector(state => state.data);
+  // useEffect(() => { dispatch(fetchData()) }, [dispatch]);
+  // console.log("????????????????????????????", value?.data);
 
   return (
     <Grid container sx={{ mt: { xs: 30, sm: 30, md: 0, lg: 0 } }}>
