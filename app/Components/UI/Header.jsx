@@ -22,9 +22,13 @@ export default function Header(props) {
 
     const { showLogin, setShowLogin, showLocationPopUp, setShowLocationPopUp } = props
 
-    const A = Cookies.get("locations")
+    const loc = Cookies.get("locations")
 
-    const loc = A ? JSON.parse(A).join(',') : ''
+    // console.log(">>>>>>>>>>>>><<<<<<<<<<<<", typeof (A));
+
+    // const loc = A ? JSON.parse(A).join(',') : ''
+
+    // console.log(A);
 
     const [fetchedData, setFetchedData] = useState(null);
 
@@ -36,9 +40,6 @@ export default function Header(props) {
 
         fetchData();
     }, []);
-
-    console.log("fetchedData from header : ", fetchedData?.featured_items?.length);
-
 
     const dropItems = [
         { name: '', URL: '', icon: '' },
@@ -233,12 +234,9 @@ export default function Header(props) {
                         />
 
 
-                        {/* <HeaderDropDown
-                            dropItems={dropItems}
-                            title="TAKE LOCATION"
-                        /> */}
 
-                        <Grid container xs={12} sm={10} md={6} lg={6} sx={{ bgcolor: '', justifyContent: 'space-between' }} >
+
+                        <Grid container xs={12} sm={10} md={6} lg={6} sx={{ bgcolor: '', justifyContent: 'space-between', alignItems: 'center ' }} >
                             <Typography
 
                                 onClick={() => {
@@ -250,7 +248,8 @@ export default function Header(props) {
                                     fontSize: { md: 11, lg: 14 },
                                     fontWeight: 700, mt: .2,
                                     color: SECONDARY_TEXTCOLOUR,
-                                    textAlign: 'center', bgcolor: ''
+                                    textAlign: 'center', bgcolor: '',
+                                    width: '80%', cursor: 'pointer'
                                 }}>
                                 {loc}
                             </Typography>
@@ -259,7 +258,7 @@ export default function Header(props) {
 
                             <Link href='/cart'>
 
-                                <Badge badgeContent={fetchedData?.featured_items?.length    } color="primary">
+                                <Badge badgeContent={fetchedData?.featured_items?.length} color="primary">
                                     <ShoppingCartIcon color="action" />
                                 </Badge>
                             </Link>
