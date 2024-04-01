@@ -28,7 +28,7 @@ export default function EnterOtp(props) {
 
     const onSubmit = (data) => {
 
-        console.log("?????????????");
+        // console.log("?????????????");
 
         axios.post(`https://pappad.intertoons.com/api/03879045/V1/verify-otp`, {
             mobile: getMobile,
@@ -38,7 +38,7 @@ export default function EnterOtp(props) {
             .then((res) => {
                 console.log('res', res);
                 res?.statusText === 'OK' ? setShowLogin(!showLogin) : '';
-                Cookies.set('auth_token', res?.data?.data?.api_token);
+                Cookies.set('user_auth_token', res?.data?.data?.api_token);
             });
     };
 

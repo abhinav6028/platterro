@@ -7,49 +7,38 @@ import BillDetails from "../Components/BillDetails";
 import { useEffect, useState } from "react";
 import getUsersData from "../hooks/useFetchData";
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 export default function Home() {
 
 
     const [fetchedData, setFetchedData] = useState(null);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-
-    //         const result = await getUsersData('V1/carts/mine?latitude=4.103389900&longitude=9.742897300');
-    //         setFetchedData(result?.data);
-
-    //     }
-
-    //     fetchData()
-    // }, []);
-
-    // console.log("fetchedData", fetchedData);
-
-    // newwwwwwwwwwwwwwwwwwww 
     let a = ""
 
+    const token = Cookies.get("user_auth_token")
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('https://pappad.intertoons.com/api/V1/carts/mine?latitude=4.103389900&longitude=9.742897300', {
-                    headers: {
-                        'Authorization': 'Bearer A2RKM0hDxbkALRe1rz09azXXtSzETW5zwoxI5okuhQ4N9HAlqlD3pVSZ43r5Eco6MVINkXd7k6biOuL0',
-                        'Content-Type': 'application/json'
-                        // Add any other headers you need
-                    }
-                });
-                // console.log(">>>>>>>>>>>>>>>>>>>>>>>")
-                setFetchedData(response?.data?.data)
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                // Handle errors here
-            }
-        };
 
-        fetchData();
-    }, []);
+        useEffect(() => {
+            const fetchData = async () => {
+                try {
+                    const response = await axios.get('https://pappad.intertoons.com/api/V1/carts/mine?latitude=4.103389900&longitude=9.742897300', {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                            // Add any other headers you need
+                        }
+                    });
+                    // console.log(">>>>>>>>>>>>>>>>>>>>>>>")
+                    setFetchedData(response?.data?.data)
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                    // Handle errors here
+                }
+            };
+
+            fetchData();
+        }, []);
 
     // console.log("fetchedData??????????", fetchedData?.cartitems)
 
@@ -128,7 +117,7 @@ export default function Home() {
                     alignItems: '', width: 'fit-content'
                 }}>
 
-                    <Grid container md={9} lg={8} bgcolor="" sx={{ height:'fit-content' }}>
+                    <Grid container md={9} lg={8} bgcolor="" sx={{ height: 'fit-content' }}>
                         {
                             fetchedData?.cartitems?.map((data, index) =>
 
