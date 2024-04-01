@@ -8,8 +8,6 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useEffect, useState } from "react";
 import getData from "@/app/hooks/useFetchData";
-import { reverse } from "dns";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function RestaurantListing() {
@@ -25,14 +23,7 @@ export default function RestaurantListing() {
         fetchData();
     }, []);
 
-
-    // const A = fetchedData
-
-    // console.log("A", A?.address?.split(',')?.reverse()[1]);
-
     const router = useRouter()
-
-
 
     return (
         <Grid container justifyContent="center" alignItems="center" bgcolor="" sx={{ py: { xs: 2, sm: 2, md: 6, lg: 6 } }}>

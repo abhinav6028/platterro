@@ -31,7 +31,7 @@ export default function Home() {
             <Grid container sx={{
                 bgcolor: '',
                 position: "fixed",
-                top: 550,
+                top: "85%",
                 zIndex: 400,
                 left: 0,
                 justifyContent: 'center'
